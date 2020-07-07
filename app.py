@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_from_directory
 from database.db import initialize_db
 from database.models import Speech
 from flask_cors import CORS, cross_origin
@@ -8,7 +8,7 @@ import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='public')
 
 app.config['MONGODB_SETTINGS'] = {
   'host': 'mongodb://localhost/filimo-speech'
@@ -17,9 +17,13 @@ cors = CORS(app)
 
 initialize_db(app)
 
-@app.route('/')
-def client():
-  return app.send_static_file('public/index.html')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+  if path != "" and os.path.exists(app.static_folder + '/' + path):  
+    return send_from_directory(app.static_folder, path)
+  else:
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/speeches')
 def get_speeches():
