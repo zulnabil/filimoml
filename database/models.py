@@ -1,0 +1,20 @@
+from .db import db
+
+class Speech(db.Document):
+    # data = db.ListField(db.FloatField(), required=True)
+    # label = db.StringField(required=True)
+    source = db.StringField(required=True)
+    mfcc0 = db.FloatField(required=True)
+    mfcc1 = db.FloatField(required=True)
+    mfcc2 = db.FloatField(required=True)
+    mfcc3 = db.FloatField(required=True)
+    mfcc4 = db.FloatField(required=True)
+    mfcc5 = db.FloatField(required=True)
+    mfcc6 = db.FloatField(required=True)
+    mfcc7 = db.FloatField(required=True)
+    mfcc8 = db.FloatField(required=True)
+    mfcc9 = db.FloatField(required=True)
+    mfcc10 = db.FloatField(required=True)
+    mfcc11 = db.FloatField(required=True)
+    mfcc12 = db.FloatField(required=True)
+    label = db.StringField(required=True)
