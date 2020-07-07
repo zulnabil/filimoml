@@ -17,6 +17,10 @@ cors = CORS(app)
 
 initialize_db(app)
 
+@app.route('/')
+def client():
+  return app.send_static_file('public/index.html')
+
 @app.route('/speeches')
 def get_speeches():
   speeches = Speech.objects().to_json()
