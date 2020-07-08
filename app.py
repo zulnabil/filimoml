@@ -19,7 +19,7 @@ initialize_db(app)
 
 @app.errorhandler(404)   
 def not_found(e):
-  send_from_directory(app.static_folder, 'index.html')
+  send_static_file(app.static_folder, 'index.html')
   
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
