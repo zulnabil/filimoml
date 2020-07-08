@@ -24,15 +24,15 @@ initialize_db(app)
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-  if path != "" and os.path.exists(app.static_folder + '/' + path):  
+  if path != "" and os.path.exists(app.static_folder + '/' + path + '/index.html'):  
     print(path)
     return send_from_directory(app.static_folder, path)
   else:
     return send_from_directory(app.static_folder, 'index.html')
 
-@app.route('/analyze')
-def analyze_page():
-  return send_from_directory(app.static_folder, 'index.html')
+# @app.route('/analyze')
+# def analyze_page():
+#   return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/speeches')
 def get_speeches():
