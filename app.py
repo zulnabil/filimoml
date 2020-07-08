@@ -27,7 +27,11 @@ def serve(path):
   if path != "" and os.path.exists(app.static_folder + '/' + path):  
     return send_from_directory(app.static_folder, path)
   else:
-    return render_template(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/analyze')
+def analyze_page():
+  return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/speeches')
 def get_speeches():
