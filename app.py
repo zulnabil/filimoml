@@ -25,6 +25,7 @@ initialize_db(app)
 @app.route('/<path:path>')
 def serve(path):
   if path != "" and os.path.exists(app.static_folder + '/' + path):  
+    console.log(path)
     return send_from_directory(app.static_folder, path)
   else:
     return send_from_directory(app.static_folder, 'index.html')
