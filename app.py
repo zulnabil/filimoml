@@ -17,22 +17,18 @@ cors = CORS(app)
 
 initialize_db(app)
 
-# @app.errorhandler(404)   
-# def not_found(e):
-#   app.send_static_file('./public/index.html')
+@app.errorhandler(404)   
+def not_found(e):
+  return send_from_directory(app.static_folder, 'index.html')
   
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-  if path != "" and os.path.exists(app.static_folder + '/' + path + '/index.html'):  
+  if path != "" and os.path.exists(app.static_folder + '/' + path):  
     print(path)
     return send_from_directory(app.static_folder, path)
   else:
     return send_from_directory(app.static_folder, 'index.html')
-
-# @app.route('/analyze')
-# def analyze_page():
-#   return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/speeches')
 def get_speeches():
