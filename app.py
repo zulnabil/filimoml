@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, send_from_directory
+from flask import Flask, request, Response, send_from_directory, render_template
 from database.db import initialize_db
 from database.models import Speech
 from flask_cors import CORS, cross_origin
@@ -17,9 +17,9 @@ cors = CORS(app)
 
 initialize_db(app)
 
-@app.errorhandler(404)   
-def not_found(e):
-  app.send_static_file('./public/index.html')
+# @app.errorhandler(404)   
+# def not_found(e):
+#   app.send_static_file('./public/index.html')
   
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -27,7 +27,7 @@ def serve(path):
   if path != "" and os.path.exists(app.static_folder + '/' + path):  
     return send_from_directory(app.static_folder, path)
   else:
-    return send_from_directory(app.static_folder, 'index.html')
+    return render_template(app.static_folder, 'index.html')
 
 @app.route('/speeches')
 def get_speeches():
