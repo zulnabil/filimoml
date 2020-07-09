@@ -52,7 +52,7 @@ def add_speech():
 def predict_speech():
   body = request.get_json()
   dataframe = pd.DataFrame(body, index=[0])
-  model = keras.models.load_model("./filimo_ml_model")
+  model = keras.models.load_model("./angryneutral_ml_model")
   output = model.predict(dataframe).tolist()
   return {
     "status": 200,
