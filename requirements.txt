@@ -25,7 +25,7 @@ mongoengine==0.19.1
 numpy==1.16.6
 pandas==0.24.2
 pathlib2==2.3.5
-pipenv==2020.6.2
+pipenv==2022.1.8
 pycrypto==2.6.1
 pygobject==3.26.1
 pymongo==3.10.1
